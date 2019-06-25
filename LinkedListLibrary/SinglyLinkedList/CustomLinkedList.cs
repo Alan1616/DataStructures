@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LinkedListLibrary
+namespace LinkedListLibrary.SinglyLinkedList
 {
     public class CustomLinkedList<T>
     {
