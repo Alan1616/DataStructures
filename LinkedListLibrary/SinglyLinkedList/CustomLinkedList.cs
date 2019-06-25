@@ -163,5 +163,22 @@ namespace LinkedListLibrary.SinglyLinkedList
             }
         }
 
+        public void Reverse()
+        {
+            Node<T> current = head;
+            Node<T> previous = null;
+            Node<T> next;
+
+            for (int i = 0; i < count; i++)
+            {
+                next = current.Next;
+                current.Next = previous;
+                previous = current;
+                current = next;
+
+            }
+            head = previous;
+        }
+
     }
 }
