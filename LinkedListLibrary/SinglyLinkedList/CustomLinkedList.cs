@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LinkedListLibrary.SinglyLinkedList
 {
-    public class CustomLinkedList<T>
+    public class CustomLinkedList<T> : IEnumerable<T>
     {
         private Node<T> head;
         private int count;
@@ -178,6 +179,23 @@ namespace LinkedListLibrary.SinglyLinkedList
 
             }
             head = previous;
+        }
+
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            Node<T> currnet = head;
+
+            for (int i = 0; i < count; i++)
+            {
+                yield return currnet.Value;
+                currnet = currnet.Next;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
     }
