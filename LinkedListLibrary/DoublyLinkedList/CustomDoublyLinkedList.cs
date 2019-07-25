@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LinkedListLibrary.DoublyLinkedList
 {
-    class CustomDoublyLinkedList<T> : IEnumerable<T>
+    public class CustomDoublyLinkedList<T> : IEnumerable<T>
     {
         private Node<T> head;
         private Node<T> tail;
@@ -38,14 +38,13 @@ namespace LinkedListLibrary.DoublyLinkedList
         }
         public CustomDoublyLinkedList()
         {
-            head = null;
-            tail = null;
+            head = new Node<T>();
+            tail = head;
         }
         public CustomDoublyLinkedList(T value)
         {
-            head.Value = value;
-            head.Next = null;
-            head.Previous = null;
+
+            head = new Node<T>(value,null,null);
             tail = head;
             count++;
         }
@@ -84,24 +83,30 @@ namespace LinkedListLibrary.DoublyLinkedList
         {
             Add(count, value);
         }
-        public void DisplayListForward()
+        public override string ToString()
         {
             Node<T> current = head;
-
+            StringBuilder output = new StringBuilder();
             while (current != null)
             {
-                Console.Write($"{current.Value}->");
+                output.Append($"{ current.Value}->");
                 current = current.Next;
             }
+            output.Append("null");
+
+            return output.ToString();
         }
-        public void DisplayListBackward()
+        public string ToStringBackwards()
         {
             Node<T> current = tail;
+            StringBuilder output = new StringBuilder();
+            output.Append("null<-");
             while (current != null)
             {
-                Console.Write($"{current.Value}<-");
+                output.Append($"<-{ current.Value}");
                 current = current.Previous;
             }
+            return output.ToString();
         }
         public void Remove(int index)
         {
@@ -171,6 +176,7 @@ namespace LinkedListLibrary.DoublyLinkedList
                 return true;
             return false;
         }
+
         private T Get(int index)
         {
             if (index < 0 || index >= count)
@@ -183,6 +189,8 @@ namespace LinkedListLibrary.DoublyLinkedList
             }
             return current.Value;
         }
+
+
 
         public IEnumerator<T> GetEnumerator()
         {

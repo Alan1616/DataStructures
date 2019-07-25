@@ -153,15 +153,18 @@ namespace LinkedListLibrary.SinglyLinkedList
 
             return current.Value;
         }
-        public void DisplayList()
+        public override string ToString()
         {
             Node<T> current = head;
-
+            StringBuilder output = new StringBuilder();
             while (current != null)
             {
-                Console.Write($"{current.Value}->");
+                output.Append($"{ current.Value}->");
                 current = current.Next;
             }
+            output.Append("null");
+
+            return output.ToString();
         }
 
         public void Reverse()
@@ -180,8 +183,6 @@ namespace LinkedListLibrary.SinglyLinkedList
             }
             head = previous;
         }
-
-
         public IEnumerator<T> GetEnumerator()
         {
             Node<T> currnet = head;
