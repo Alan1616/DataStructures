@@ -31,7 +31,7 @@ namespace LinkedListLibrary.SinglyLinkedList
         }
         public CustomLinkedList()
         {
-
+            head = null;
         }
         public CustomLinkedList(T value)
         {
@@ -50,7 +50,7 @@ namespace LinkedListLibrary.SinglyLinkedList
 
             if (index == 0 || head == null)
             {
-                head = new Node<T>(value, head);
+                head = new Node<T>(value, null);
                 count++;
             }
             else

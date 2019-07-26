@@ -76,6 +76,7 @@ namespace LinkedListLibrary.Stack
         {
             dataSource.Reverse();
         }
+ 
 
         public void Clear()
         {

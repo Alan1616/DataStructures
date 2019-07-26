@@ -38,7 +38,7 @@ namespace LinkedListLibrary.DoublyLinkedList
         }
         public CustomDoublyLinkedList()
         {
-            head = new Node<T>();
+            head = null;
             tail = head;
         }
         public CustomDoublyLinkedList(T value)
