@@ -1,32 +1,36 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LinkedListLibrary.SinglyLinkedList;
+using CustomDataStructures.Lists;
 
-namespace LinkedListLibrary.FIFOQueue
+namespace CustomDataStructures.Queues
 {
-    public  class CustomQueue<T>
+    /// <summary>
+    /// Represents custom LIFO queue 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class CustomStack<T> : IEnumerable<T>
     {
-        private CustomLinkedList<T> dataSource;
-
+        private CustomList<T> dataSource;
         public int Count
         {
             get { return dataSource.Count; }
         }
-        public bool isEmpty
+        public bool IsEmpty
         {
-            get { return dataSource.isEmpty; }
+            get { return dataSource.IsEmpty; }
         }
 
-        public CustomQueue()
+        public CustomStack()
         {
-            dataSource = new CustomLinkedList<T>();
+            dataSource = new CustomList<T>();
         }
-        public CustomQueue(T value)
+        public CustomStack(T value)
         {
-            dataSource = new CustomLinkedList<T>(value);
+            dataSource = new CustomList<T>(value);
         }
 
         public void Push(T value)
@@ -38,31 +42,28 @@ namespace LinkedListLibrary.FIFOQueue
         {
             if (Count > 0)
             {
-                T output = dataSource[0];
-                dataSource.Remove(0);
+                T output = dataSource[Count - 1];
+                dataSource.RemoveAt(Count - 1);
                 return output;
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
-
         }
 
         public T Peek()
         {
             if (Count > 0)
             {
-                T output = dataSource[0];
+                T output = dataSource[Count - 1];
                 return output;
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
-
         }
-
 
         public bool Contains(T value)
         {
@@ -73,11 +74,21 @@ namespace LinkedListLibrary.FIFOQueue
         {
             dataSource.Reverse();
         }
+ 
 
         public void Clear()
         {
             dataSource.Clear();
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            return dataSource.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

@@ -1,17 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using LinkedListLibrary.SinglyLinkedList;
+using CustomDataStructures.Lists;
 
-namespace LinkedListLibrary.Stack
+namespace CustomDataStructures.Queues
 {
-    /// <summary>
-    /// Represents custom LIFO queue 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class CustomStack<T> 
+    public  class CustomQueue<T> : IEnumerable<T>
     {
         private CustomLinkedList<T> dataSource;
 
@@ -21,14 +18,14 @@ namespace LinkedListLibrary.Stack
         }
         public bool isEmpty
         {
-            get { return dataSource.isEmpty; }
+            get { return dataSource.IsEmpty; }
         }
 
-        public CustomStack()
+        public CustomQueue()
         {
             dataSource = new CustomLinkedList<T>();
         }
-        public CustomStack(T value)
+        public CustomQueue(T value)
         {
             dataSource = new CustomLinkedList<T>(value);
         }
@@ -42,29 +39,29 @@ namespace LinkedListLibrary.Stack
         {
             if (Count > 0)
             {
-                T output = dataSource[Count - 1];
-                dataSource.Remove(Count - 1);
+                T output = dataSource[0];
+                dataSource.RemoveAt(0);
                 return output;
-
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
+
         }
 
         public T Peek()
         {
             if (Count > 0)
             {
-                T output = dataSource[Count - 1];
+                T output = dataSource[0];
                 return output;
-
             }
             else
             {
                 throw new ArgumentOutOfRangeException();
             }
+
         }
 
         public bool Contains(T value)
@@ -76,14 +73,20 @@ namespace LinkedListLibrary.Stack
         {
             dataSource.Reverse();
         }
- 
 
         public void Clear()
         {
             dataSource.Clear();
         }
 
+        public IEnumerator<T> GetEnumerator()
+        {
+            return dataSource.GetEnumerator();
+        }
 
-
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

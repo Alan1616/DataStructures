@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LinkedListLibrary</RootNamespace>
     <AssemblyName>LinkedListLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,13 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DoublyLinkedList\CustomDoublyLinkedList.cs" />
-    <Compile Include="DoublyLinkedList\Node.cs" />
-    <Compile Include="FIFOQueue\CustomQueue.cs" />
-    <Compile Include="SinglyLinkedList\CustomLinkedList.cs" />
-    <Compile Include="SinglyLinkedList\Node.cs" />
+    <Compile Include=".NETLike\Lists\DoublyLinkedList\CoreFunctionality.cs" />
+    <Compile Include=".NETLike\Lists\DoublyLinkedList\Features.cs" />
+    <Compile Include=".NETLike\Lists\DoublyLinkedList\Node.cs" />
+    <Compile Include=".NETLike\Lists\List\CoreFunctionality.cs" />
+    <Compile Include=".NETLike\Lists\List\ExtensionMethods.cs" />
+    <Compile Include=".NETLike\Lists\List\Features.cs" />
+    <Compile Include=".NETLike\Lists\SinglyLinkedList\Features.cs" />
+    <Compile Include=".NETLike\Lists\SinglyLinkedList\ExtensionMethods.cs" />
+    <Compile Include=".NETLike\Queues\FIFOQueue\CustomQueue.cs" />
+    <Compile Include=".NETLike\Lists\SinglyLinkedList\CoreFunctionality.cs" />
+    <Compile Include=".NETLike\Lists\SinglyLinkedList\Node.cs" />
+    <Compile Include=".NETLike\Tools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Stack\CustomStack.cs" />
+    <Compile Include=".NETLike\Queues\Stack\CustomStack.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CustomDataStructures.Tools;
 
-namespace LinkedListLibrary.DoublyLinkedList
+namespace CustomDataStructures.Lists
 {
-    public class CustomDoublyLinkedList<T> : IEnumerable<T>
+    public partial class CustomDoublyLinkedList<T> : IEnumerable<T>
     {
         private Node<T> head;
         private Node<T> tail;
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private int count;
+
         public int Count
         {
             get
@@ -30,11 +35,8 @@ namespace LinkedListLibrary.DoublyLinkedList
         }
         public T this[int index]
         {
-            get
-            {
-                return Get(index);
-            }
-
+            get => Get(index);
+            set => Add(index, value);
         }
         public CustomDoublyLinkedList()
         {
@@ -48,6 +50,32 @@ namespace LinkedListLibrary.DoublyLinkedList
             tail = head;
             count++;
         }
+        public CustomDoublyLinkedList(IEnumerable<T> collection)
+        {
+            AddRange(collection);
+        }
+
+        public void AddRange(IEnumerable collection)
+        {
+            Node<T> current = tail;
+            foreach (T item in collection)
+            {
+                if (head == null)
+                {
+                    current = new Node<T>(item, null, current);
+                    head = current;
+                }
+                else
+                {
+                    current.Next = new Node<T>(item, null, current);
+                    current = current.Next;
+                }               
+              
+                tail = current;
+               
+            }
+            
+        }
         public void Add(int index, T value)
         {
             if (index < 0)
@@ -55,14 +83,16 @@ namespace LinkedListLibrary.DoublyLinkedList
             if (index > count)
                 index = count;
 
+            Node<T> current;
+
             if (index == 0 || head == null)
             {
                 head = new Node<T>(value, null);
-                count++;
+                current = head;
             }
             else
             {
-                Node<T> current = head;
+                current = head;
 
                 for (int i = 0; i < index - 1; i++)
                 {
@@ -71,13 +101,12 @@ namespace LinkedListLibrary.DoublyLinkedList
                 Node<T> toJoin = new Node<T>(value, current.Next, current);
                 if (current.Next != null)
                     current.Next.Previous = toJoin;
-                current.Next = toJoin;
-
-
-                if (index == count)
-                    tail = current.Next;
-                count++;
+                current.Next = toJoin;     
             }
+
+            if (index == count)
+                tail = current.Next;
+            count++;
         }
         public void Add(T value)
         {
@@ -149,7 +178,7 @@ namespace LinkedListLibrary.DoublyLinkedList
             Node<T> current = head;
             for (int i = 0; i < count; i++)
             {
-                if (current.Value.Equals(value))
+                if (AreElementsEqual(current.Value,value))
                     return i;
                 current = current.Next;
             }
@@ -162,7 +191,7 @@ namespace LinkedListLibrary.DoublyLinkedList
 
             for (int i = 0; i < count; i++)
             {
-                if (current.Value.Equals(value))
+                if (AreElementsEqual(current.Value, value))
                     output.Add(i);
                 current = current.Next;
             }
@@ -172,11 +201,8 @@ namespace LinkedListLibrary.DoublyLinkedList
         }
         public bool Contains(T value)
         {
-            if (FirstIndexOf(value) >= 0)
-                return true;
-            return false;
+            return FirstIndexOf(value) >= 0;
         }
-
         private T Get(int index)
         {
             if (index < 0 || index >= count)
@@ -189,9 +215,6 @@ namespace LinkedListLibrary.DoublyLinkedList
             }
             return current.Value;
         }
-
-
-
         public IEnumerator<T> GetEnumerator()
         {
             Node<T> currnet = head;
@@ -202,10 +225,10 @@ namespace LinkedListLibrary.DoublyLinkedList
                 currnet = currnet.Next;
             }
         }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
+
     }
 }
